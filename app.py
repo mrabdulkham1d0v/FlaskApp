@@ -1,4 +1,6 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+from flask_cors import cross_origin
 import os
 import base64
 import face_recognition
@@ -86,8 +88,10 @@ recognition_threshold = 0.6
 # recognized_person_id = recognize_person(unknown_img_base64)
 
 app = Flask(__name__)
+cors = CORS(app)
 
 @app.route('/add_person', methods=['POST'])
+@cross_origin()
 def add_person_route():
     person_id = request.form['person_id']
     front_img_base64 = request.form['front_img_base64']
@@ -101,12 +105,14 @@ def add_person_route():
         return jsonify({'status': 'failure', 'message': 'Failed to add person'})
 
 @app.route('/set_threshold', methods=['POST'])
+@cross_origin()
 def set_threshold_route():
     threshold = float(request.form['threshold'])
     set_threshold(threshold)
     return jsonify({'status': 'success', 'message': f'Threshold set to {threshold}'})
 
 @app.route('/recognize_person', methods=['POST'])
+@cross_origin()
 def recognize_person_route():
     base64_img = request.form['base64Img']
     recognized_person_id = recognize_person(base64_img)
@@ -116,6 +122,7 @@ def recognize_person_route():
         return jsonify({'status': 'failure', 'message': 'Person not recognized'})
 
 @app.route('/', methods=['GET'])
+@cross_origin()
 def get_index():
     return "Hello World!"
 
