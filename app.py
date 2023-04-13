@@ -88,7 +88,7 @@ recognition_threshold = 0.6
 # recognized_person_id = recognize_person(unknown_img_base64)
 
 app = Flask(__name__)
-cors = CORS(app)
+CORS(app, resources={r"/*": {"origins": "*", "headers": "*"}})
 
 @app.route('/add_person', methods=['POST'])
 @cross_origin()
