@@ -111,6 +111,17 @@ def set_threshold_route():
     set_threshold(threshold)
     return jsonify({'status': 'success', 'message': f'Threshold set to {threshold}'})
 
+@app.route('/get_embedding', methods=['POST'])
+@cross_origin()
+def get_embedding_route():
+    base64_img = request.form['base64Img']
+    img = load_image_from_base64(base64_img)
+    embedding = generate_embedding(img)
+    if embedding is not None:
+        return jsonify({'status': 'success', 'embedding': embedding.tolist()})
+    else:
+        return jsonify({'status': 'failure', 'message': 'No face detected'})
+
 @app.route('/recognize_person', methods=['POST'])
 @cross_origin()
 def recognize_person_route():
