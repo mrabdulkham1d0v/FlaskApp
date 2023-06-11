@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_859ee75cfe5649b09438e19b96bb984d }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_2034335f15cd46dd856a999e72c2f1cd }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_b6f7fa6a03184c81813f9fea8037e0b4 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_c5e428203f7a4bdf8832c3b495fc0fb0 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_859ee75cfe5649b09438e19b96bb984d }}/flaskapp:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_b6f7fa6a03184c81813f9fea8037e0b4 }}/flaskapp:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'safeentry-fr-backup'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_8cf4f316d8634d2fb0486759825fa7cc }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_859ee75cfe5649b09438e19b96bb984d }}/flaskapp:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_685d9ac8be714419abd054ed971aec51 }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_b6f7fa6a03184c81813f9fea8037e0b4 }}/flaskapp:${{ github.sha }}'
