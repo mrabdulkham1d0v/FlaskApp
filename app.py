@@ -80,7 +80,7 @@ def recognize_person(base64_img):
         if 'embedding' not in user or user['embedding'] is None: 
             continue
         known_embedding = np.array(user['embedding'])
-        person_id = user['_id']   # or other field that serves as person ID
+        person_id = str(user['_id'])   # or other field that serves as person ID
 
         distance = face_recognition.face_distance([known_embedding], unknown_embedding)
 
