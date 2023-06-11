@@ -9,9 +9,9 @@ from PIL import Image
 from io import BytesIO
 import numpy as np
 
-load_dotenv()
-MONGO_URI = os.getenv("MONGO_URI")
-
+# load_dotenv()
+# MONGO_URI = os.getenv("MONGO_URI")
+MONGO_URI = "mongodb+srv://LightJ_us:light@safeentry.sgllzxo.mongodb.net/?retryWrites=true&w=majority"
 client = MongoClient(MONGO_URI)
 db = client.test
 users = db.users
